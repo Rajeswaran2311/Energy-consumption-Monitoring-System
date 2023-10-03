@@ -75,4 +75,4 @@ def dashboard():
     return render_template('dashbord.html', line_chart=line_chart_json, area_chart=area_chart_json)
 
 if __name__ == '__main__':
-    app.run(debug=False,host='0.0.0.0')
+    app.run()
