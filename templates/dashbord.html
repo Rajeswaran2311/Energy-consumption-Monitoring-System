@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+        <style>
+            *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+    background: radial-gradient(circle at 10% 20%, rgb(0, 93, 133) 0%, rgb(0, 181, 149) 90%);
+}
+
+
+            nav {
+                background-color: #48AAAD; /* Background color */
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+    z-index:2
+}
+    
+    
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+    
+    nav li {
+        float: left;
+    }
+    
+    nav a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    
+    nav a:hover {
+        background-color: #ddd; /* Hover color */
+        color: black;
+    }
+        </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('prediction') }}">Prediction</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        </ul>
+    </nav>
+    <br>
+  
+
+    <!-- Display the Line Chart -->
+    <!--<h2 style="color:white">Line Chart</h2>-->
+    <div id="line_chart"></div>
+
+    <!-- Display the Area Chart -->
+    <!--<h2 style="color:white">Area Chart</h2>-->
+    <div id="area_chart"></div>
+
+    <!-- Include Plotly JavaScript to render the charts -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        var line_chart_data = {{ line_chart | safe }};
+        var area_chart_data = {{ area_chart | safe }};
+
+        // Render the Line Chart
+        Plotly.newPlot('line_chart', line_chart_data.data, line_chart_data.layout);
+
+        // Render the Area Chart
+        Plotly.newPlot('area_chart', area_chart_data.data, area_chart_data.layout);
+    </script>
+</body>
+</html>

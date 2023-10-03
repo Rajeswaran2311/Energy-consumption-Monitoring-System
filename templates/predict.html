@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Energy Consumption Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .temp {
+            height: 100vh !important;
+            position: absolute;
+            left: 35%;
+            top: 20%;
+
+            /* background: red; */
+
+        }
+        h1{
+            text-align: center;
+        }
+        nav {
+            height: 5vh;
+            background-color: #48AAAD;
+            /* Background color */
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            z-index: 2
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        form{
+            margin-left: 150px;
+            display: flex-column;
+            align-items: center;
+    
+}
+        nav a:hover {
+            background-color: #ddd;
+            /* Hover color */
+            color: black;
+        }
+
+        /* Center the form on the page */
+        .form-container {
+            text-align: center;
+            margin: 0 auto;
+            /* Adjust as needed */
+        }
+
+        .temp1 {
+            box-sizing: border-box;
+            border: 2px solid white;
+            height: 700px;
+            width: 40rem;
+            padding-top: 100px;
+            
+
+        }
+
+        /* Style for form elements (optional) */
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: radial-gradient(circle at 10% 20%, rgb(0, 93, 133) 0%, rgb(0, 181, 149) 90%);
+        }
+
+        /* label{
+    padding: .5rem;
+    margin: 1rem;
+} */
+        input {
+            padding: .5rem;
+            margin: 1rem;
+        }
+
+        .btn {
+            width: 35%;
+           
+        }
+
+        .form-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Style the form elements as needed */
+        .form-column label {
+            margin-bottom: 5px;
+        }
+
+        .form-column input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('prediction') }}">Prediction</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        </ul>
+    </nav>
+    <div class="rajesh">
+
+    </div>
+    <div class="temp">
+        <div class="temp1">
+            <h1 style="color:white">Energy Consumption Prediction</h1>
+
+            <form method="POST" action="/predict">
+
+
+                <label style="color:white" for="vrms_min">Vrms ph-n L1N Min:</label>
+                <input type="number" name="vrms_min" id="vrms_min" step="0.01" required><br>
+
+                <label style="color:white" for="vrms_avg">Vrms ph-n L1N Avg:</label>
+                <input type="number" name="vrms_avg" id="vrms_avg" step="0.01" required><br>
+
+                <label style="color:white" for="vrms_max">Vrms ph-n L1N Max:</label>
+                <input style="margin-left: 0.75rem;" type="number" name="vrms_max" id="vrms_max" step="0.01"
+                    required><br>
+
+                <label style="color:white" for="current_min">Current L1 Min:</label>
+                <input style="margin-left: 2.75rem;" type="number" name="current_min" id="current_min" step="0.01"
+                    required><br>
+
+                <label style="color:white" for="current_avg">Current L1 Avg:</label>
+                <input style="margin-left: 2.75rem;" type="number" name="current_avg" id="current_avg" step="0.01"
+                    required><br>
+
+                <label style="color:white" for="current_max">Current L1 Max:</label>
+                <input style="margin-left: 2.75rem;" type="number" name="current_max" id="current_max" step="0.01"
+                    required><br>
+
+
+                <input type="submit" class="btn" value="Prediction">
+            </form>
+
+            {% if prediction_result %}
+            <div class="result" style="color: black; border: 2px solid white;width: 40%;background-color:  white;margin-left: 150px;border-radius:12px;">
+                <p>Predicted Consumption: {{ prediction_result }}</p>
+            </div>
+            {% endif %}
+
+
+        </div>
+    </div>
+</body>
+
+</html>

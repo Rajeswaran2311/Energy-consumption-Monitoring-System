@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background: radial-gradient(circle at 10% 20%, rgb(0, 93, 133) 0%, rgb(0, 181, 149) 90%);
+    }
+
+    img{    
+        width: 100%;
+        height: 65vh;
+    }
+        nav {
+    background-color: #48AAAD; /* Background color */
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    z-index:2
+}
+   
+
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+}
+
+nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background-color: #ddd; /* Hover color */
+    color: black;
+
+}
+table, th, td {    
+border: 1px solid white;  
+margin-left: auto;  
+margin-right: auto;  
+border-collapse: collapse;    
+width: 500px;  
+text-align: center;  
+font-size: 15px;
+color: white;  
+}  
+
+.container1{
+    /* background: red; */
+    display: flex;
+    /* justify-content: space-between; */
+    width: 70vw;
+    margin-left: 18rem;
+    /* background: red; */
+}
+
+.table{
+    margin: 5rem;
+}
+.content{
+   
+  margin: auto;
+  width: 100%;
+  /* margin-left: 36%; */
+  padding: 10px;
+  color: white;
+
+}  
+.content ul {
+            list-style-type: none; /* Remove default bullets */
+            padding-left: 0; /* Remove default padding */
+        }
+
+.content ul li::before {
+            content: "\2605"; /* Unicode character for a star (★) */
+            margin-right: 5px; /* Space between the star and text */
+            color: orange; /* Color of the star */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('prediction') }}">Prediction</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+        </ul>
+    </nav>
+  
+    <img src="static\images\office.jpg" alt="">
+    
+    <h2 style="text-align: center;color: white;">Glimpse of Dataset</h2>
+    <div class="container1">
+        
+        <div class="table">
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Vrms ph-n L1N Min</th>
+            <th>Vrms ph-n L1N Avg</th>
+            <th>Vrms ph-n L1N Max</th>
+            <th>Current L1 Min</th>
+            <th>Current L1 Avg</th>
+            <th>Current L1 Max</th>
+            <!-- Add more table headers for your dataset columns -->
+        </tr>
+        {% for index, row in data.head(6).iterrows() %}
+        <tr>
+            <td>{{ row['Date'] }}</td>
+            <td>{{ row['Time'] }}</td>
+            <td>{{ row['Vrms ph-n L1N Min'] }}</td>
+            <td>{{ row['Vrms ph-n L1N Avg'] }}</td>
+            <td>{{ row['Vrms ph-n L1N Max'] }}</td>
+            <td>{{ row['Current L1 Min'] }}</td>
+            <td>{{ row['Current L1 Avg'] }}</td>
+            <td>{{ row['Current L1 Max'] }}</td>
+            
+            <!-- Add more table data for your dataset columns -->
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+   
+    <div class="content">
+        <h2 style="color:white">Overview of Dataset</h2>
+        <ul>
+            <li>Vrms ph-n L1N Min -Minimum voltage measured between phase and neutral</li>
+            <li>Vrms ph-n L1N Avg (Average voltage measured between phase and neutral)</li>
+            <li>Vrms ph-n L1N Max (Maximum voltage measured between phase and neutral)</li>
+            <li>Current L1 Min (Minimum current)</li>
+            <li>Current L1 Avg (Average current)</li>
+            <li>Current L1 Max (Maximum current)</li>
+        </ul>
+    
+    </div>
+</div>
+</html>
